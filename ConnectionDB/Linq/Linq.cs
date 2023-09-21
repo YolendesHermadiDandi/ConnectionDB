@@ -78,7 +78,7 @@ namespace ConnectionDB
                                   TotalEmployee = g.Count(),
                                   MinSalary = g.Min(e => e.Salary),
                                   MaxSalary = g.Max(e => e.Salary),
-                                  AvgSalary = g.Average(e =>e.Salary),
+                                  AvgSalary = g.Average(e => e.Salary),
                               }).ToList();
                 GeneralMenu.List("Detail Departement", result);
             }

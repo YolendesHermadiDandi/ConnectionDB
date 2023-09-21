@@ -23,9 +23,9 @@ namespace ConnectionDB
         const string tblJobHistory = "tbl_job_history";
 
 
-        public List<dynamic> getAll(string tabelName)
+        public List<object> getAll(string tabelName)
         {
-            var listData = new List<dynamic>();
+            var listData = new List<object>();
 
 
             using var connection = Connection.Connect();
@@ -61,7 +61,7 @@ namespace ConnectionDB
                 Console.WriteLine($"Error: {ex.Message}");
             }
 
-            return new List<dynamic>();
+            return new List<object>();
         }
 
         public dynamic getById(string tabelName, int id)
@@ -308,13 +308,15 @@ namespace ConnectionDB
         }
 
 
-        public List<dynamic> TableSelector(dynamic reader, String tabelName, dynamic listData)
+        public List<object> TableSelector(dynamic reader, String tabelName, dynamic listData)
         {
 
 
             switch (tabelName)
             {
+                
                 case tblRegions:
+                    
                     listData.Add(new Region
                     {
                         Id = reader.GetInt32(0),
