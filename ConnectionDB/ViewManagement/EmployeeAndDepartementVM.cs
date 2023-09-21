@@ -12,7 +12,7 @@ namespace ConnectionDB
         public int TotalEmployee { get; set; }
         public double? MinSalary { get; set; }
         public double? MaxSalary { get; set; }
-        public double? AvgSalary { get; set; }
+        public dynamic? AvgSalary { get; set; }
 
         public override string ToString()
         {

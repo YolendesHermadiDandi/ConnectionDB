@@ -2,10 +2,6 @@
 {
     internal class Region
     {
-
-
-
-
         public int Id { get; set; }
         public string Name { get; set; }
 
@@ -27,6 +23,9 @@
 
             return new List<dynamic>();
         }
+
+        
+
 
         public static string GetById(string id)
         {

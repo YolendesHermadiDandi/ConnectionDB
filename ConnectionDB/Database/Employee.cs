@@ -27,7 +27,7 @@ namespace ConnectionDB.Database
                 $"- {Email} - {PhoneNumber} - {HireDate} - {Salary} - {Comissionpct}";
         }
 
-        public List<dynamic> GetAll()
+        public List<Employee> GetAll()
         {
             string tabelName = "tbl_employees";
             if (ErrorHandler.EHandlerGetAll(tabelName) == true)
@@ -35,15 +35,31 @@ namespace ConnectionDB.Database
                 var employee = new TabelQuery();
 
                 List<dynamic> getAllEmployee = employee.getAll(tabelName);
-                return getAllEmployee;
+                List<Employee> employees = getAllEmployee.Select(item => new Employee
+                {
+                    Id = item.Id,
+                    JobId = item.JobId,
+                    ManagerId = item.ManagerId,
+                    DepartementId = item.DepartementId,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    PhoneNumber = item.PhoneNumber,
+                    HireDate = item.HireDate,
+                    Salary = item.Salary,
+                    Comissionpct = item.Comissionpct,
+                    Email = item.Email,
+
+                }).ToList();
+                return employees;
+               
             };
 
-            return new List<dynamic>();
+            return new List<Employee>();
         }
 
 
 
-        public static void Insert(int jobId, int managerId, int departementId, string firstName,
+        public static void Insert(int jobId, int managerId, int departementId, string firstName, string email,
             string lastName, string phoneNumber, DateTime hireDate, float salary, float commissionPct)
         {
             Employee employee = new Employee();
@@ -56,7 +72,7 @@ namespace ConnectionDB.Database
             employee.HireDate = hireDate;
             employee.Salary = salary;
             employee.Comissionpct = commissionPct;
-
+            employee.Email = email;
             var query = new TabelQuery();
             query.Insert("tbl_employees", employee);
 

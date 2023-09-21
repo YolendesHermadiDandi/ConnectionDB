@@ -12,7 +12,7 @@ namespace ConnectionDB
 {
     internal class TabelQuery
     {
-        List<dynamic> listData = new List<dynamic>();
+
         const string tblEmployees = "tbl_employees";
         const string tblRegions = "tbl_regions";
         const string tblLocations = "tbl_locations";
@@ -25,7 +25,7 @@ namespace ConnectionDB
 
         public List<dynamic> getAll(string tabelName)
         {
-            //var listData = new List<dynamic>();
+            var listData = new List<dynamic>();
 
 
             using var connection = Connection.Connect();
@@ -44,17 +44,17 @@ namespace ConnectionDB
                 {
                     while (reader.Read())
                     {
-                      TableSelector(reader, tabelName);
+                        TableSelector(reader, tabelName, listData);
                     }
                     reader.Close();
                     connection.Close();
 
-                    return listData;
+
                 }
                 reader.Close();
                 connection.Close();
 
-                return new List<dynamic>();
+                return listData;
             }
             catch (Exception ex)
             {
@@ -231,7 +231,8 @@ namespace ConnectionDB
             {
                 command.CommandText = "INSERT INTO " + tblJobHistory + " VALUES (@emoloyeeId, " +
                     "@startDate, @jobId, @departementId, @endDate)";
-            }else if (tabelName.Equals(tblJob))
+            }
+            else if (tabelName.Equals(tblJob))
             {
                 command.CommandText = "INSERT INTO " + tblJob + " VALUES (@id, @title, " +
                     "@minSalary, @maxSalary)";
@@ -265,10 +266,12 @@ namespace ConnectionDB
                 {
                     command.Parameters.Add(new SqlParameter("@name", Data.Name));
                     command.Parameters.Add(new SqlParameter("@regionId", Data.RegionId));
-                }else if (tabelName.Equals(tblRegions))
+                }
+                else if (tabelName.Equals(tblRegions))
                 {
                     command.Parameters.Add(new SqlParameter("@name", Data.Name));
-                }else if (tabelName.Equals(tblLocations))
+                }
+                else if (tabelName.Equals(tblLocations))
                 {
                     command.Parameters.Add(new SqlParameter("@countryId", Data.CountryId));
                     //sisanya belom ya kk
@@ -305,101 +308,94 @@ namespace ConnectionDB
         }
 
 
-        public List<dynamic> TableSelector(dynamic reader, String tabelName)
+        public List<dynamic> TableSelector(dynamic reader, String tabelName, dynamic listData)
         {
-            if (tabelName.Equals(tblRegions))
-            {
-                listData.Add(new Region
-                {
-                    Id = reader.GetInt32(0),
-                    Name = reader.GetString(1)
-                });
-                return listData;
-            }
-            else if (tabelName.Equals(tblLocations))
-            {
-                listData.Add(new Location
-                {
-                    Id = reader.GetInt32(0),
-                    CountryId = reader.GetInt32(1),
-                    StreetAddress = reader.GetString(2),
-                    PostCode = reader.GetString(3),
-                    City = reader.GetString(4),
-                    StateProvince = reader.GetString(5),
 
-                });
-                return listData;
-            }
-            else if (tabelName.Equals(tblCountries))
+
+            switch (tabelName)
             {
-                listData.Add(new Country
-                {
-                    Id = reader.GetInt32(0),
-                    RegionId = reader.GetInt32(1),
-                    Name = reader.GetString(2)
-                });
-                return listData;
-            }
-            else if (tabelName.Equals(tblDepartements))
-            {
-                listData.Add(new Departement
-                {
-                    Id = reader.GetInt32(0),
-                    ManagerId = reader.GetInt32(1),
-                    LocationId = reader.GetInt32(2),
-                    Name = reader.GetString(3)
-                });
-                return listData;
+                case tblRegions:
+                    listData.Add(new Region
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(1)
+                    });
+                    break;
+                case tblCountries:
+                    listData.Add(new Country
+                    {
+                        Id = reader.GetInt32(0),
+                        RegionId = reader.GetInt32(1),
+                        Name = reader.GetString(2)
+                    });
+                    break;
+                case tblLocations:
+                    listData.Add(new Location
+                    {
+                        Id = reader.GetInt32(0),
+                        CountryId = reader.GetInt32(1),
+                        StreetAddress = reader.GetString(2),
+                        PostCode = reader.GetString(3),
+                        City = reader.GetString(4),
+                        StateProvince = reader.GetString(5),
 
-            }
-            else if (tabelName.Equals(tblEmployees))
-            {
+                    });
+                    break;
+                case tblDepartements:
+                    listData.Add(new Departement
+                    {
+                        Id = reader.GetInt32(0),
+                        ManagerId = reader.GetInt32(1),
+                        LocationId = reader.GetInt32(2),
+                        Name = reader.GetString(3)
+                    });
+                    break;
+                case tblEmployees:
 
-                listData.Add(new Employee
-                {
-                    Id = reader.GetInt32(0),
-                    JobId = reader.GetInt32(1),
-                    //ManagerId = reader.GetInt32(reader.GetOrdinal("id")),
-                    ManagerId = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
-                    DepartementId = reader.GetInt32(3),
-                    FirstName = reader.GetString(4),
-                    LastName = reader.GetString(5),
-                    Email = reader.GetString(6),
-                    PhoneNumber = reader.GetString(7),
-                    HireDate = reader.GetDateTime(8),
-                    Salary = reader.GetDouble(9),
-                    Comissionpct = reader.GetDouble(10),
+                    listData.Add(new Employee
+                    {
+                        Id = reader.GetInt32(0),
+                        JobId = reader.GetInt32(1),
+                        ManagerId = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
+                        DepartementId = reader.GetInt32(3),
+                        FirstName = reader.GetString(4),
+                        LastName = reader.GetString(5),
+                        Email = reader.GetString(6),
+                        PhoneNumber = reader.GetString(7),
+                        HireDate = reader.GetDateTime(8),
+                        Salary = reader.GetDouble(9),
+                        Comissionpct = reader.GetDouble(10),
 
-                });
-                return listData;
-            }
-            else if (tabelName.Equals(tblJobHistory))
-            {
-                listData.Add(new JobHistory
-                {
-                    EmployeeId = reader.GetInt32(0),
-                    StartDate = reader.GetDateTime(1),
-                    JobId = reader.GetInt32(2),
-                    DepartementId = reader.GetInt32(3),
-                    EndDate = reader.GetDateTime(4)
+                    });
+                    break;
+                case tblJobHistory:
+                    listData.Add(new JobHistory
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        StartDate = reader.GetDateTime(1),
+                        JobId = reader.GetInt32(2),
+                        DepartementId = reader.GetInt32(3),
+                        EndDate = reader.GetDateTime(4)
 
-                });
-                return listData;
+                    });
+                    break;
+                case tblJob:
+                    listData.Add(new Job
+                    {
+                        Id = reader.GetInt32(0),
+                        Title = reader.GetString(1),
+                        MinSalary = reader.GetDouble(2),
+                        MaxSalary = reader.GetDouble(3),
 
-            }
-            else if (tabelName.Equals(tblJob))
-            {
-                listData.Add(new Job
-                {
-                    Id = reader.GetInt32(0),
-                    Title = reader.GetString(1),
-                    MinSalary = reader.GetDouble(2),
-                    MaxSalary = reader.GetDouble(3),
+                    });
 
-                });
-                return listData;
+                    break;
+
+                default:
+                    break;
             }
             return listData;
+
         }
     }
 }
