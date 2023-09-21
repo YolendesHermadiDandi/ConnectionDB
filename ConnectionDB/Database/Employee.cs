@@ -51,7 +51,7 @@ namespace ConnectionDB.Database
 
                 }).ToList();
                 return employees;
-               
+
             };
 
             return new List<Employee>();
@@ -80,63 +80,5 @@ namespace ConnectionDB.Database
         }
 
 
-
-
-
-
-
-
-        //untuk Linq
-        public List<Employee> GetAllEmployee()
-        {
-            var countries = new List<Employee>();
-
-            using var connection = Connection.Connect();
-            using var command = Connection.SqlCommand();
-
-            command.Connection = connection;
-            command.CommandText = "SELECT * FROM tbl_employees";
-
-            try
-            {
-                connection.Open();
-
-                using var reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        countries.Add(new Employee()
-                        {
-                            Id = reader.GetInt32(0),
-                            JobId = reader.GetInt32(1),
-                            //ManagerId = reader.GetInt32(reader.GetOrdinal("id")),
-                            ManagerId = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
-                            DepartementId = reader.GetInt32(3),
-                            FirstName = reader.GetString(4),
-                            LastName = reader.GetString(5),
-                            Email = reader.GetString(6),
-                            PhoneNumber = reader.GetString(7),
-                            HireDate = reader.GetDateTime(8),
-                            Salary = reader.GetDouble(9),
-                            Comissionpct = reader.GetDouble(10),
-                        });
-                    }
-                    reader.Close();
-                    connection.Close();
-
-                    return countries;
-                }
-                reader.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-
-            return new List<Employee>();
-        }
     }
 }
