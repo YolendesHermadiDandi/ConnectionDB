@@ -52,7 +52,7 @@ namespace ConnectionDB.Model
 
         public string Insert(string name)
         {
-          
+
             Region region = new Region();
             region.Name = name;
             query = new QueryModel();
@@ -62,8 +62,8 @@ namespace ConnectionDB.Model
 
         public string Delete(int id)
         {
-            
-            
+
+
             Region region = new Region();
             region.Id = id;
             query = new QueryModel();
@@ -72,9 +72,11 @@ namespace ConnectionDB.Model
             return result;
         }
 
-        public string Update()
+        public string Update(Region data)
         {
-            return "";
+            query = new QueryModel();
+            string result = query.Update(tabelName, data);
+            return result;
         }
     }
 }

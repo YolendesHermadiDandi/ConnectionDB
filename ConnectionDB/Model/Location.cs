@@ -17,19 +17,19 @@ namespace ConnectionDB.Model
             return $"{Id} - {CountryId} - {StreetAddress} - {PostCode} - {City} - {StateProvince}";
         }
 
-        public List<dynamic> GetAll()
-        {
-            string tabelName = "tbl_locations";
-            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-            {
-                var location = new TabelQuery();
+        //public List<dynamic> GetAll()
+        //{
+        //    string tabelName = "tbl_locations";
+        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+        //    {
+        //        var location = new TabelQuery();
 
-                List<dynamic> getAllLocation = location.getAll(tabelName);
-                return getAllLocation;
-            };
+        //        List<dynamic> getAllLocation = location.getAll(tabelName);
+        //        return getAllLocation;
+        //    };
 
-            return new List<dynamic>();
-        }
+        //    return new List<dynamic>();
+        //}
 
 
     }

@@ -21,19 +21,19 @@ namespace ConnectionDB.Model
             return $"{Id} - {Title} - {MinSalary} - {MaxSalary}";
         }
 
-        public List<dynamic> GetAll()
-        {
-            string tabelName = "tbl_jobs";
-            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-            {
-                var job = new TabelQuery();
+        //public List<dynamic> GetAll()
+        //{
+        //    string tabelName = "tbl_jobs";
+        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+        //    {
+        //        var job = new TabelQuery();
 
-                List<dynamic> getAllJob = job.getAll(tabelName);
-                return getAllJob;
-            };
+        //        List<dynamic> getAllJob = job.getAll(tabelName);
+        //        return getAllJob;
+        //    };
 
-            return new List<dynamic>();
-        }
+        //    return new List<dynamic>();
+        //}
 
     }
 }

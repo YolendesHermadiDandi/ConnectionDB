@@ -1,6 +1,8 @@
 ﻿
 
 
+using Microsoft.VisualBasic;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net.NetworkInformation;
 using System.Reflection.Emit;
@@ -243,8 +245,88 @@ namespace ConnectionDB.Model
             }
         }
 
+        public string Update(string tabelName, dynamic Data)
+        {
 
 
+            using var connection = Connection.Connect();
+            using var command = Connection.SqlCommand();
+
+
+            command.Connection = connection;
+
+            if (InsertQuerySelector(tabelName).Equals("TABEL TIDAK ADA"))
+            {
+                return "TABEL TIDAK DITEMUKAN";
+            }
+
+            command.CommandText = UpdateQuerySelector(tabelName, Data.Id);
+
+
+
+
+            try
+            {
+
+                if (tabelName.Equals(tblEmployees))
+                {
+                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
+                    command.Parameters.Add(new SqlParameter("@jobId", Data.JobId));
+                    command.Parameters.Add(new SqlParameter("@managerId", Data.ManagerId));
+                    command.Parameters.Add(new SqlParameter("@departementId", Data.DepartementId));
+                    command.Parameters.Add(new SqlParameter("@firstName", Data.FirstName));
+                    command.Parameters.Add(new SqlParameter("@lastName", Data.LastName));
+                    command.Parameters.Add(new SqlParameter("@email", Data.Email));
+                    command.Parameters.Add(new SqlParameter("@phoneNumber", Data.PhoneNumber));
+                    command.Parameters.Add(new SqlParameter("@hireDate", Data.HireDate));
+                    command.Parameters.Add(new SqlParameter("@salary", Data.Salary));
+                    command.Parameters.Add(new SqlParameter("@commisionPct", Data.CommisionPct));
+
+                }
+                else if (tabelName.Equals(tblCountries))
+                {
+                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
+                    command.Parameters.Add(new SqlParameter("@regionId", Data.RegionId));
+                }
+                else if (tabelName.Equals(tblRegions))
+                {
+                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
+                }
+                else if (tabelName.Equals(tblLocations))
+                {
+                    command.Parameters.Add(new SqlParameter("@countryId", Data.CountryId));
+                    command.Parameters.Add(new SqlParameter("@streetAddress", Data.StreetAddress));
+                    command.Parameters.Add(new SqlParameter("@streetAddress", Data.StreetAddress));
+
+
+                }
+
+
+
+                connection.Open();
+                using var transaction = connection.BeginTransaction();
+                try
+                {
+                    command.Transaction = transaction;
+
+                    var result = command.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    connection.Close();
+
+                    return result.ToString();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return $"Error Transaction: {ex.Message}";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
 
         private object TableSelector(dynamic reader, String tabelName, dynamic listData)
         {
@@ -380,6 +462,52 @@ namespace ConnectionDB.Model
 
             return "TABEL TIDAK ADA";
 
+
+        }
+
+        private string UpdateQuerySelector(string tabelName, int id)
+        {
+
+
+            if (tabelName.Equals(tblEmployees))
+            {
+
+
+                return "INSERT INTO tbl_employees VALUES (@jobId, @managerId," +
+                     " @departementId, @firstName, @lastName, @email, @phoneNumber, @hireDate, @salary," +
+                     " @commisionPct);";
+            }
+            else if (tabelName.Equals(tblRegions))
+            {
+
+                return $"UPDATE tbl_regions SET name = @name where id={id}";
+            }
+            else if (tabelName.Equals(tblCountries))
+            {
+                return "INSERT INTO tbl_countries VALUES (@regionId, @name)";
+            }
+            else if (tabelName.Equals(tblLocatons))
+            {
+                return "INSERT INTO tbl_locations VALUES (@countryId, @streetAddress," +
+                    " @postCode, @city, @state_province)";
+            }
+            else if (tabelName.Equals(tblDepartements))
+            {
+                return "INSERT INTO tbl_locations VALUES (@departementName, @managerID," +
+                    " @locationID)";
+            }
+            else if (tabelName.Equals(tblJobHistory))
+            {
+                return "INSERT INTO " + tblJobHistory + " VALUES (@emoloyeeId, " +
+                    "@startDate, @jobId, @departementId, @endDate)";
+            }
+            else if (tabelName.Equals(tblJob))
+            {
+                return "INSERT INTO " + tblJob + " VALUES (@id, @title, " +
+                    "@minSalary, @maxSalary)";
+            }
+
+            return "TABEL TIDAK ADA";
 
         }
     }

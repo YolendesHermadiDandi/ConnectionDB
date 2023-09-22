@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace ConnectionDB.View.ViewManagement
 {
-    internal class RegionView : GeneralView
+    internal class CountriesView : GeneralView
     {
         private static string input = "";
-        public static void RegionMenu()
+        public static void CountryMenu()
         {
             var isLoop = true;
             while (isLoop)
             {
 
-                Console.WriteLine("1. List all region");
-                Console.WriteLine("2. Insert region");
-                Console.WriteLine("3. Get region by id");
-                Console.WriteLine("4. Update region");
-                Console.WriteLine("5. Delete region");
+                Console.WriteLine("1. List all country");
+                Console.WriteLine("2. Insert country");
+                Console.WriteLine("3. Get country by id");
+                Console.WriteLine("4. Update country");
+                Console.WriteLine("5. Delete country");
                 Console.WriteLine("6. Back");
                 Console.Write("Enter your choice: ");
                 input = Console.ReadLine();
@@ -31,45 +31,62 @@ namespace ConnectionDB.View.ViewManagement
 
         private static bool Menu(string input)
         {
-            var region = new Region();
-            var regionView = new RegionView();
+            var country = new Country();
+            var countriesView = new CountriesView();
 
-            var regionController = new RegionController(region, regionView);
+            var countryController = new CountryController(country, countriesView);
             switch (input)
             {
                 case "1":
-                    regionController.GetAll();
+                    countryController.GetAll();
                     break;
                 case "2":
-                    regionController.Insert();
+                    //regionController.Insert();
+                    countryController.Insert();
                     break;
                 case "3":
                     Console.Write("Masukan Id : ");
                     input = Console.ReadLine();
-                    regionController.GetById(input);
+                    countryController.GetById(input);
                     break;
                 case "4":
-                    regionController.Update();
+                    //regionController.Update();
                     break;
                 case "5":
-                    regionController.Delete();
+                    //regionController.Delete();
                     break;
                 case "6":
                     return false;
 
                 default:
-                    Console.WriteLine("inputan tidak valid");
+                    //Console.WriteLine("inputan tidak valid");
                     break;
             }
             return true;
         }
 
-        public string InsertInput()
+        public object InsertInput()
         {
-            Console.Write("Masukan nama region : ");
+
+            var country = new Country();
+            var countriesView = new CountriesView();
+
+            var countryController = new CountryController(country, countriesView);
+
+            Console.Write("Masukan region id : ");
+            var regionId = Console.ReadLine();
+            Console.Write("masukan country name: ");
             var name = Console.ReadLine();
 
-            return name;
+            if(int.TryParse(regionId, out int id) == true)
+            {
+                country.Name = name;
+                country.RegionId = id;
+            }
+
+            
+
+            return country;
         }
 
         public string InsertDelete()
@@ -86,6 +103,5 @@ namespace ConnectionDB.View.ViewManagement
             var name = Console.ReadLine();
             return name;
         }
-
     }
 }

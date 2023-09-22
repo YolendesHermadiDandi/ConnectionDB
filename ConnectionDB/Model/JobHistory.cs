@@ -17,19 +17,19 @@ namespace ConnectionDB.Model
             return $"{EmployeeId} - {StartDate} - {JobId} - {DepartementId} - {EndDate}";
         }
 
-        public List<dynamic> GetAll()
-        {
-            string tabelName = "tbl_job_history";
-            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-            {
-                var history = new TabelQuery();
+        //public List<dynamic> GetAll()
+        //{
+        //    string tabelName = "tbl_job_history";
+        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+        //    {
+        //        var history = new TabelQuery();
 
-                List<dynamic> getAllHistory = history.getAll(tabelName);
-                return getAllHistory;
-            };
+        //        List<dynamic> getAllHistory = history.getAll(tabelName);
+        //        return getAllHistory;
+        //    };
 
-            return new List<dynamic>();
-        }
+        //    return new List<dynamic>();
+        //}
 
     }
 }

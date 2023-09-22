@@ -19,18 +19,18 @@ namespace ConnectionDB.Model
             return $"{Id} - {ManagerId} - {LocationId} - {Name}";
         }
 
-        public List<dynamic> GetAll()
-        {
-            string tabelName = "tbl_departements";
-            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-            {
-                var departement = new TabelQuery();
+        //public List<dynamic> GetAll()
+        //{
+        //    string tabelName = "tbl_departements";
+        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+        //    {
+        //        var departement = new TabelQuery();
 
-                List<dynamic> getAllDepartement = departement.getAll(tabelName);
-                return getAllDepartement;
-            };
+        //        List<dynamic> getAllDepartement = departement.getAll(tabelName);
+        //        return getAllDepartement;
+        //    };
 
-            return new List<dynamic>();
-        }
+        //    return new List<dynamic>();
+        //}
     }
 }

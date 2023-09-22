@@ -30,35 +30,35 @@ namespace ConnectionDB.Model
                 $"- {Email} - {PhoneNumber} - {HireDate} - {Salary} - {Comissionpct}";
         }
 
-        public List<Employee> GetAll()
-        {
+        //public List<Employee> GetAll()
+        //{
 
-            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-            {
-                var employee = new TabelQuery();
+        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+        //    {
+        //        var employee = new TabelQuery();
 
-                List<dynamic> getAllEmployee = employee.getAll(tabelName);
-                List<Employee> employees = getAllEmployee.Select(item => new Employee
-                {
-                    Id = item.Id,
-                    JobId = item.JobId,
-                    ManagerId = item.ManagerId,
-                    DepartementId = item.DepartementId,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                    PhoneNumber = item.PhoneNumber,
-                    HireDate = item.HireDate,
-                    Salary = item.Salary,
-                    Comissionpct = item.Comissionpct,
-                    Email = item.Email,
+        //        List<dynamic> getAllEmployee = employee.getAll(tabelName);
+        //        List<Employee> employees = getAllEmployee.Select(item => new Employee
+        //        {
+        //            Id = item.Id,
+        //            JobId = item.JobId,
+        //            ManagerId = item.ManagerId,
+        //            DepartementId = item.DepartementId,
+        //            FirstName = item.FirstName,
+        //            LastName = item.LastName,
+        //            PhoneNumber = item.PhoneNumber,
+        //            HireDate = item.HireDate,
+        //            Salary = item.Salary,
+        //            Comissionpct = item.Comissionpct,
+        //            Email = item.Email,
 
-                }).ToList();
-                return employees;
+        //        }).ToList();
+        //        return employees;
 
-            };
+        //    };
 
-            return new List<Employee>();
-        }
+        //    return new List<Employee>();
+        //}
 
         //public Employee GetById(string id)
         //{

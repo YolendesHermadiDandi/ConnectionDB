@@ -41,7 +41,16 @@ namespace ConnectionDB.Controller
             else
             {
                 var result = _region.GetById(getId);
-                _regionView.List("regions", result);
+
+                if (!result.Any())
+                {
+                    Console.WriteLine("Region tidak ditemukan");
+                }
+                else
+                {
+                    _regionView.List("regions", result);
+                }
+
             }
         }
 
@@ -99,7 +108,7 @@ namespace ConnectionDB.Controller
 
             try
             {
-                int id = Convert.ToInt32(input); 
+                int id = Convert.ToInt32(input);
                 result = _region.Delete(id);
             }
             catch (Exception e)
@@ -112,7 +121,40 @@ namespace ConnectionDB.Controller
             _regionView.Transaction(result);
         }
 
+        public void Update()
+        {
+            string id = _regionView.InsertUpdate();
 
 
+            if (!int.TryParse(id, out int getId))
+            {
+                Console.WriteLine("invalid input");
+            }
+            else
+            {
+                var result = _region.GetById(getId);
+
+                if (!result.Any())
+                {
+                    Console.WriteLine("Region tidak ditemukan");
+                }
+                else
+                {
+                    string name = _regionView.InsertInput();
+
+                    Region data = new Region();
+                    foreach (var item in result)
+                    {
+                        data.Id = item.Id;
+                        data.Name = name;
+                    }
+                    _region.Update(data);
+                    Console.WriteLine("Data berhasil diupdate");
+                }
+
+            }
+
+
+        }
     }
 }
