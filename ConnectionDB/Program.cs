@@ -1,7 +1,4 @@
-﻿
-using ConnectionDB.Database;
-using System.Data;
-using System.Data.SqlClient;
+﻿using ConnectionDB.Model;
 
 namespace ConnectionDB
 {
@@ -23,7 +20,8 @@ namespace ConnectionDB
                 Console.WriteLine("7. List all Job");
                 Console.WriteLine("8. Join Employee And Departement");
                 Console.WriteLine("9. Detail Departements");
-                Console.WriteLine("11. Exit");
+                Console.WriteLine("10. Get employee by id");
+                Console.WriteLine("21. Exit");
                 Console.Write("Enter your choice: ");
                 var input = Console.ReadLine();
                 choice = Menu(input);
@@ -34,39 +32,39 @@ namespace ConnectionDB
             switch (input)
             {
                 case "1":
-                    var region = new Region();
-                    var regions = region.GetAll();
-                    GeneralMenu.List("Regions", regions);
+                    //var region = new Region();
+                    //var regions = region.GetAll();
+                    //GeneralMenu.List("Regions", regions);
                     break;
                 case "2":
-                    var country = new Country();
-                    var countries = country.GetAll();
-                    GeneralMenu.List("countries", countries);
+                    //var country = new Country();
+                    //var countries = country.GetAll();
+                    //GeneralMenu.List("countries", countries);
                     break;
                 case "3":
-                    var location = new Location();
-                    var locations = location.GetAll();
-                    GeneralMenu.List("locations", locations);
+                    //var location = new Location();
+                    //var locations = location.GetAll();
+                    //GeneralMenu.List("locations", locations);
                     break;
                 case "4":
-                    var departement = new Departement();
-                    var departements = departement.GetAll();
-                    GeneralMenu.List("departements", departements);
+                    //var departement = new Departement();
+                    //var departements = departement.GetAll();
+                    //GeneralMenu.List("departements", departements);
                     break;
                 case "5":
-                    var employee = new Employee();
-                    var employees = employee.GetAll();
-                    GeneralMenu.List("employees", employees);
+                    //var employee = new Employee();
+                    //var employees = employee.GetAll();
+                    //GeneralMenu.List("employees", employees);
                     break;
                 case "6":
-                    var jobHistory = new JobHistory();
-                    var alljobhistory = jobHistory.GetAll();
-                    GeneralMenu.List("Job History", alljobhistory);
+                    //var jobHistory = new JobHistory();
+                    //var alljobhistory = jobHistory.GetAll();
+                    //GeneralMenu.List("Job History", alljobhistory);
                     break;
                 case "7":
-                    var job = new Job();
-                    var allJob = job.GetAll();
-                    GeneralMenu.List("Job", allJob);
+                    //var job = new Job();
+                    //var allJob = job.GetAll();
+                    //GeneralMenu.List("Job", allJob);
                     break;
                 case "8":
                     Linq.GetDetailEmployee();
@@ -74,7 +72,12 @@ namespace ConnectionDB
                 case "9":
                     Linq.GetDetailDepartement();
                     break;
-                case "11":
+                case "10":
+                    var employee1 = new Employee();
+                    
+                    //var getById = employee1.GetById(Console.ReadLine());
+                    break;
+                case "21":
                     return false;
                 default:
 

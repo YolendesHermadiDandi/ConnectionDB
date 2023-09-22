@@ -1,8 +1,6 @@
-﻿
+﻿using System.Data.SqlClient;
 
-using System.Data.SqlClient;
-
-namespace ConnectionDB.Database
+namespace ConnectionDB.Model
 {
     internal class Connection
     {

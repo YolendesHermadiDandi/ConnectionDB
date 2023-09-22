@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ConnectionDB.Database
+
+
+namespace ConnectionDB.Model
 {
     internal class Employee
     {
+
+        private const string tabelName = "tbl_employees";
         public int Id { get; set; }
         public int JobId { get; set; }
         public int ManagerId { get; set; }
@@ -29,7 +33,7 @@ namespace ConnectionDB.Database
 
         public List<Employee> GetAll()
         {
-            string tabelName = "tbl_employees";
+
             if (ErrorHandler.EHandlerGetAll(tabelName) == true)
             {
                 var employee = new TabelQuery();
@@ -56,6 +60,36 @@ namespace ConnectionDB.Database
 
             return new List<Employee>();
         }
+
+        //public Employee GetById(string id)
+        //{
+            
+
+        //    int getid = ErrorHandler.EHandlerGetRegionById(id);
+        //    if (getid > 0)
+        //    {
+        //        var employee = new TabelQuery();
+        //        Employee getEmployeeById = (Employee) employee.getById(tabelName, getid);
+        //        Employee emp = new Employee
+        //        {
+        //            Id = getEmployeeById.Id,
+        //            JobId = getEmployeeById.JobId,
+        //            ManagerId = getEmployeeById.ManagerId,
+        //            DepartementId = getEmployeeById.DepartementId,
+        //            FirstName = getEmployeeById.FirstName,
+        //            LastName = getEmployeeById.LastName,
+        //            PhoneNumber = getEmployeeById.PhoneNumber,
+        //            HireDate = getEmployeeById.HireDate,
+        //            Salary = getEmployeeById.Salary,
+        //            Comissionpct = getEmployeeById.Comissionpct,
+        //            Email = getEmployeeById.Email,
+        //        };
+        //        return emp;
+        //    }
+        //    return new Employee();
+                       
+
+        //}
 
 
 

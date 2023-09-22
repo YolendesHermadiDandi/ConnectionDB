@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionDB.Database
+namespace ConnectionDB.Model
 {
     internal class Country
     {
@@ -45,10 +45,5 @@ namespace ConnectionDB.Database
             Console.WriteLine(query.Insert("tbl_countries", country));
         }
 
-
-        //public override string ToString()
-        //{
-        //    return
-        //}
     }
 }

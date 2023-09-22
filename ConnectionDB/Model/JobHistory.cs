@@ -1,4 +1,5 @@
-﻿namespace ConnectionDB.Database
+﻿
+namespace ConnectionDB.Model
 {
     internal class JobHistory
     {

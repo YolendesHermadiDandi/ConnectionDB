@@ -1,8 +1,4 @@
-﻿
-
-using System.Xml.Linq;
-
-namespace ConnectionDB.Database
+﻿namespace ConnectionDB.Model
 {
     internal class Location
     {

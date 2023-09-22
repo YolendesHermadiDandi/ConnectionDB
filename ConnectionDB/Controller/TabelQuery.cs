@@ -6,7 +6,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using ConnectionDB.Database;
+using ConnectionDB.Model;
 
 namespace ConnectionDB
 {
@@ -64,8 +64,11 @@ namespace ConnectionDB
             return new List<object>();
         }
 
-        public dynamic getById(string tabelName, int id)
+        public object getById(string tabelName, int id)
         {
+            
+            var listData = new object();
+
             using var connection = Connection.Connect();
             using var command = Connection.SqlCommand();
 
@@ -82,114 +85,24 @@ namespace ConnectionDB
                 {
                     while (reader.Read())
                     {
-                        if (tabelName.Equals(tblRegions))
-                        {
-                            var region = new Region
-                            {
-                                Id = reader.GetInt32(0),
-                                Name = reader.GetString(1)
-                            };
-                            return region;
-                        }
-                        else if (tabelName.Equals(tblLocations))
-                        {
-                            var location = new Location
-                            {
-                                Id = reader.GetInt32(0),
-                                CountryId = reader.GetInt32(1),
-                                StreetAddress = reader.GetString(2),
-                                PostCode = reader.GetString(3),
-                                City = reader.GetString(4),
-                                StateProvince = reader.GetString(5),
-
-                            };
-                            return location;
-                        }
-                        else if (tabelName.Equals(tblCountries))
-                        {
-                            var country = new Country
-                            {
-                                Id = reader.GetInt32(0),
-                                RegionId = reader.GetInt32(1),
-                                Name = reader.GetString(2)
-                            };
-                            return country;
-
-                        }
-                        else if (tabelName.Equals(tblDepartements))
-                        {
-
-                            var departement = new Departement
-                            {
-                                Id = reader.GetInt32(0),
-                                ManagerId = reader.GetInt32(1),
-                                LocationId = reader.GetInt32(2),
-                                Name = reader.GetString(3)
-                            };
-                            return departement;
-
-                        }
-                        else if (tabelName.Equals(tblEmployees))
-                        {
-                            var employee = new Employee
-                            {
-                                Id = reader.GetInt32(0),
-                                JobId = reader.GetInt32(1),
-                                DepartementId = reader.GetInt32(2),
-                                FirstName = reader.GetString(3),
-                                LastName = reader.GetString(4),
-                                Email = reader.GetString(5),
-                                PhoneNumber = reader.GetString(6),
-                                HireDate = reader.GetDateTime(7),
-                                Salary = reader.GetDouble(8),
-                                Comissionpct = reader.GetDouble(9),
-
-                            };
-                            return employee;
-                        }
-                        else if (tabelName.Equals(tblJobHistory))
-                        {
-                            var jobHistory = new JobHistory
-                            {
-                                EmployeeId = reader.GetInt32(0),
-                                StartDate = reader.GetDateTime(1),
-                                JobId = reader.GetInt32(2),
-                                DepartementId = reader.GetInt32(3),
-                                EndDate = reader.GetDateTime(4)
-
-                            };
-                            return jobHistory;
-
-                        }
-                        else if (tabelName.Equals(tblJob))
-                        {
-                            var job = new Job
-                            {
-                                Id = reader.GetInt32(0),
-                                Title = reader.GetString(1),
-                                MinSalary = reader.GetDouble(2),
-                                MaxSalary = reader.GetDouble(3),
-
-                            };
-                            return job;
-                        }
+                        TableSelector(reader, tabelName, listData);
                     }
                     reader.Close();
                     connection.Close();
 
-                    return null;
+                 
                 }
                 reader.Close();
                 connection.Close();
 
-                return null;
+                return listData;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
 
-            return null;
+            return new object();
         }
 
         public String Insert(string tabelName, dynamic Data)
