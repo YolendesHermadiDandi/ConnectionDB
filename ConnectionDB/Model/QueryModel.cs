@@ -427,7 +427,7 @@ namespace ConnectionDB.Model
 
             if (tabelName.Equals(tblEmployees))
             {
-                return "INSERT INTO tbl_employees VALUES (@jobId, @managerId," +
+                return "INSERT INTO "+tblEmployees+" VALUES (@jobId, @managerId," +
                      " @departementId, @firstName, @lastName, @email, @phoneNumber, @hireDate, @salary," +
                      " @commisionPct);";
             }
@@ -437,7 +437,7 @@ namespace ConnectionDB.Model
             }
             else if (tabelName.Equals(tblCountries))
             {
-                return "INSERT INTO tbl_countries VALUES (@regionId, @name)";
+                return "INSERT INTO "+tblCountries+" VALUES (@regionId, @name)";
             }
             else if (tabelName.Equals(tblLocatons))
             {
