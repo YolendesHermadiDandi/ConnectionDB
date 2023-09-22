@@ -32,39 +32,39 @@ namespace ConnectionDB
             switch (input)
             {
                 case "1":
-                    //var region = new Region();
-                    //var regions = region.GetAll();
-                    //GeneralMenu.List("Regions", regions);
+                    var region = new Region();
+                    var regions = region.GetAll();
+                    GeneralMenu.List("Regions", regions);
                     break;
                 case "2":
-                    //var country = new Country();
-                    //var countries = country.GetAll();
-                    //GeneralMenu.List("countries", countries);
+                    var country = new Country();
+                    var countries = country.GetAll();
+                    GeneralMenu.List("countries", countries);
                     break;
                 case "3":
-                    //var location = new Location();
-                    //var locations = location.GetAll();
-                    //GeneralMenu.List("locations", locations);
+                    var location = new Location();
+                    var locations = location.GetAll();
+                    GeneralMenu.List("locations", locations);
                     break;
                 case "4":
-                    //var departement = new Departement();
-                    //var departements = departement.GetAll();
-                    //GeneralMenu.List("departements", departements);
+                    var departement = new Departement();
+                    var departements = departement.GetAll();
+                    GeneralMenu.List("departements", departements);
                     break;
                 case "5":
-                    //var employee = new Employee();
-                    //var employees = employee.GetAll();
-                    //GeneralMenu.List("employees", employees);
+                    var employee = new Employee();
+                    var employees = employee.GetAll();
+                    GeneralMenu.List("employees", employees);
                     break;
                 case "6":
-                    //var jobHistory = new JobHistory();
-                    //var alljobhistory = jobHistory.GetAll();
-                    //GeneralMenu.List("Job History", alljobhistory);
+                    var jobHistory = new JobHistory();
+                    var alljobhistory = jobHistory.GetAll();
+                    GeneralMenu.List("Job History", alljobhistory);
                     break;
                 case "7":
-                    //var job = new Job();
-                    //var allJob = job.GetAll();
-                    //GeneralMenu.List("Job", allJob);
+                    var job = new Job();
+                    var allJob = job.GetAll();
+                    GeneralMenu.List("Job", allJob);
                     break;
                 case "8":
                     Linq.GetDetailEmployee();

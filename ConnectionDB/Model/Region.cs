@@ -12,21 +12,21 @@ namespace ConnectionDB.Model
             return $"{Id} - {Name}";
         }
 
-        //public List<dynamic> GetAll()
-        //{
-        //    string tabelName = "tbl_regions";
-        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-        //    {
-        //        var region = new TabelQuery();
+        public List<dynamic> GetAll()
+        {
+            string tabelName = "tbl_regions";
+            if (ErrorHandler.EHandlerGetAll(tabelName) == true)
+            {
+                var region = new TabelQuery();
 
-        //        List<dynamic> getAllRegion = region.getAll(tabelName);
-        //        return getAllRegion;
-        //    };
+                List<dynamic> getAllRegion = region.getAll(tabelName);
+                return getAllRegion;
+            };
 
-        //    return new List<dynamic>();
-        //}
+            return new List<dynamic>();
+        }
 
-        
+
 
 
         //public static string GetById(string id)
