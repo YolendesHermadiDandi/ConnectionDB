@@ -1,4 +1,6 @@
-﻿namespace ConnectionDB.Model
+﻿using ConnectionDB.Controller;
+
+namespace ConnectionDB.Model
 {
     internal class Location
     {

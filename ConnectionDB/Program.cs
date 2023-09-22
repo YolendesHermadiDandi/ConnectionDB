@@ -1,4 +1,6 @@
 ﻿using ConnectionDB.Model;
+using ConnectionDB.View;
+using ConnectionDB.View.ViewManagement;
 
 namespace ConnectionDB
 {
@@ -11,7 +13,7 @@ namespace ConnectionDB
             var choice = true;
             while (choice)
             {
-                Console.WriteLine("1. List all regions");
+                Console.WriteLine("1. regions");
                 Console.WriteLine("2. List all countries");
                 Console.WriteLine("3. List all locations");
                 Console.WriteLine("4. List all departements");
@@ -32,9 +34,7 @@ namespace ConnectionDB
             switch (input)
             {
                 case "1":
-                    //var region = new Region();
-                    //var regions = region.GetAll();
-                    //GeneralMenu.List("Regions", regions);
+                    RegionView.RegionMenu();
                     break;
                 case "2":
                     //var country = new Country();
@@ -67,14 +67,14 @@ namespace ConnectionDB
                     //GeneralMenu.List("Job", allJob);
                     break;
                 case "8":
-                    Linq.GetDetailEmployee();
+                    //Linq.GetDetailEmployee();
                     break;
                 case "9":
                     Linq.GetDetailDepartement();
                     break;
                 case "10":
                     var employee1 = new Employee();
-                    
+
                     //var getById = employee1.GetById(Console.ReadLine());
                     break;
                 case "21":

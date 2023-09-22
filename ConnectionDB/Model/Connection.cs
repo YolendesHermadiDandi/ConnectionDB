@@ -22,5 +22,12 @@ namespace ConnectionDB.Model
             var command = new SqlCommand();
             return command;
         }
+
+        public static SqlParameter SetParameter(string name, object value)
+        {
+            return new SqlParameter(name, value);
+        }
+
+
     }
 }

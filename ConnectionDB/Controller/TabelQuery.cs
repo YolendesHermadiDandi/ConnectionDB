@@ -64,161 +64,161 @@ namespace ConnectionDB
             return new List<object>();
         }
 
-        public object getById(string tabelName, int id)
-        {
+        //public object getById(string tabelName, int id)
+        //{
             
-            var listData = new object();
+        //    var listData = new object();
 
-            using var connection = Connection.Connect();
-            using var command = Connection.SqlCommand();
+        //    using var connection = Connection.Connect();
+        //    using var command = Connection.SqlCommand();
 
-            command.Connection = connection;
-            command.CommandText = "SELECT * FROM " + tabelName + " WHERE id =" + id;
+        //    command.Connection = connection;
+        //    command.CommandText = "SELECT * FROM " + tabelName + " WHERE id =" + id;
 
-            try
-            {
-                connection.Open();
+        //    try
+        //    {
+        //        connection.Open();
 
-                using var reader = command.ExecuteReader();
+        //        using var reader = command.ExecuteReader();
 
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        TableSelector(reader, tabelName, listData);
-                    }
-                    reader.Close();
-                    connection.Close();
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                TableSelector(reader, tabelName, listData);
+        //            }
+        //            reader.Close();
+        //            connection.Close();
 
                  
-                }
-                reader.Close();
-                connection.Close();
+        //        }
+        //        reader.Close();
+        //        connection.Close();
 
-                return listData;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+        //        return listData;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error: {ex.Message}");
+        //    }
 
-            return new object();
-        }
+        //    return new object();
+        //}
 
-        public String Insert(string tabelName, dynamic Data)
-        {
+        //public String Insert(string tabelName, dynamic Data)
+        //{
 
-            using var connection = Connection.Connect();
+        //    using var connection = Connection.Connect();
 
-            using var command = Connection.SqlCommand();
-
-
-
-            command.Connection = connection;
-
-            if (tabelName.Equals(tblEmployees))
-            {
-                command.CommandText = "INSERT INTO tbl_employees VALUES (@jobId, @managerId," +
-                    " @departementId, @firstName, @lastName, @email, @phoneNumber, @hireDate, @salary," +
-                    " @commisionPct);";
-            }
-            else if (tabelName.Equals(tblRegions))
-            {
-                command.CommandText = "INESRT INTO tbl_regions VALUES (@name)";
-            }
-            else if (tabelName.Equals(tblCountries))
-            {
-                command.CommandText = "INSERT INTO tbl_countries VALUES (@regionId, @name)";
-            }
-            else if (tabelName.Equals(tblLocatons))
-            {
-                command.CommandText = "INSERT INTO tbl_locations VALUES (@countryId, @streetAddress," +
-                    " @postCode, @city, @state_province)";
-            }
-            else if (tabelName.Equals(tblDepartements))
-            {
-                command.CommandText = "INSERT INTO tbl_locations VALUES (@departementName, @managerID," +
-                    " @locationID)";
-            }
-            else if (tabelName.Equals(tblJobHistory))
-            {
-                command.CommandText = "INSERT INTO " + tblJobHistory + " VALUES (@emoloyeeId, " +
-                    "@startDate, @jobId, @departementId, @endDate)";
-            }
-            else if (tabelName.Equals(tblJob))
-            {
-                command.CommandText = "INSERT INTO " + tblJob + " VALUES (@id, @title, " +
-                    "@minSalary, @maxSalary)";
-            }
-            else
-            {
-                return "TABEL TIDAK ADA";
-            }
+        //    using var command = Connection.SqlCommand();
 
 
 
-            try
-            {
-                ;
-                if (tabelName.Equals(tblEmployees))
-                {
-                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
-                    command.Parameters.Add(new SqlParameter("@jobId", Data.JobId));
-                    command.Parameters.Add(new SqlParameter("@managerId", Data.ManagerId));
-                    command.Parameters.Add(new SqlParameter("@departementId", Data.DepartementId));
-                    command.Parameters.Add(new SqlParameter("@firstName", Data.FirstName));
-                    command.Parameters.Add(new SqlParameter("@lastName", Data.LastName));
-                    command.Parameters.Add(new SqlParameter("@email", Data.Email));
-                    command.Parameters.Add(new SqlParameter("@phoneNumber", Data.PhoneNumber));
-                    command.Parameters.Add(new SqlParameter("@hireDate", Data.HireDate));
-                    command.Parameters.Add(new SqlParameter("@salary", Data.Salary));
-                    command.Parameters.Add(new SqlParameter("@commisionPct", Data.CommisionPct));
+        //    command.Connection = connection;
 
-                }
-                else if (tabelName.Equals(tblCountries))
-                {
-                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
-                    command.Parameters.Add(new SqlParameter("@regionId", Data.RegionId));
-                }
-                else if (tabelName.Equals(tblRegions))
-                {
-                    command.Parameters.Add(new SqlParameter("@name", Data.Name));
-                }
-                else if (tabelName.Equals(tblLocations))
-                {
-                    command.Parameters.Add(new SqlParameter("@countryId", Data.CountryId));
-                    //sisanya belom ya kk
-                }
+        //    if (tabelName.Equals(tblEmployees))
+        //    {
+        //        command.CommandText = "INSERT INTO tbl_employees VALUES (@jobId, @managerId," +
+        //            " @departementId, @firstName, @lastName, @email, @phoneNumber, @hireDate, @salary," +
+        //            " @commisionPct);";
+        //    }
+        //    else if (tabelName.Equals(tblRegions))
+        //    {
+        //        command.CommandText = "INESRT INTO tbl_regions VALUES (@name)";
+        //    }
+        //    else if (tabelName.Equals(tblCountries))
+        //    {
+        //        command.CommandText = "INSERT INTO tbl_countries VALUES (@regionId, @name)";
+        //    }
+        //    else if (tabelName.Equals(tblLocatons))
+        //    {
+        //        command.CommandText = "INSERT INTO tbl_locations VALUES (@countryId, @streetAddress," +
+        //            " @postCode, @city, @state_province)";
+        //    }
+        //    else if (tabelName.Equals(tblDepartements))
+        //    {
+        //        command.CommandText = "INSERT INTO tbl_locations VALUES (@departementName, @managerID," +
+        //            " @locationID)";
+        //    }
+        //    else if (tabelName.Equals(tblJobHistory))
+        //    {
+        //        command.CommandText = "INSERT INTO " + tblJobHistory + " VALUES (@emoloyeeId, " +
+        //            "@startDate, @jobId, @departementId, @endDate)";
+        //    }
+        //    else if (tabelName.Equals(tblJob))
+        //    {
+        //        command.CommandText = "INSERT INTO " + tblJob + " VALUES (@id, @title, " +
+        //            "@minSalary, @maxSalary)";
+        //    }
+        //    else
+        //    {
+        //        return "TABEL TIDAK ADA";
+        //    }
 
 
+
+        //    try
+        //    {
+        //        ;
+        //        if (tabelName.Equals(tblEmployees))
+        //        {
+        //            command.Parameters.Add(new SqlParameter("@name", Data.Name));
+        //            command.Parameters.Add(new SqlParameter("@jobId", Data.JobId));
+        //            command.Parameters.Add(new SqlParameter("@managerId", Data.ManagerId));
+        //            command.Parameters.Add(new SqlParameter("@departementId", Data.DepartementId));
+        //            command.Parameters.Add(new SqlParameter("@firstName", Data.FirstName));
+        //            command.Parameters.Add(new SqlParameter("@lastName", Data.LastName));
+        //            command.Parameters.Add(new SqlParameter("@email", Data.Email));
+        //            command.Parameters.Add(new SqlParameter("@phoneNumber", Data.PhoneNumber));
+        //            command.Parameters.Add(new SqlParameter("@hireDate", Data.HireDate));
+        //            command.Parameters.Add(new SqlParameter("@salary", Data.Salary));
+        //            command.Parameters.Add(new SqlParameter("@commisionPct", Data.CommisionPct));
+
+        //        }
+        //        else if (tabelName.Equals(tblCountries))
+        //        {
+        //            command.Parameters.Add(new SqlParameter("@name", Data.Name));
+        //            command.Parameters.Add(new SqlParameter("@regionId", Data.RegionId));
+        //        }
+        //        else if (tabelName.Equals(tblRegions))
+        //        {
+        //            command.Parameters.Add(new SqlParameter("@name", Data.Name));
+        //        }
+        //        else if (tabelName.Equals(tblLocations))
+        //        {
+        //            command.Parameters.Add(new SqlParameter("@countryId", Data.CountryId));
+        //            //sisanya belom ya kk
+        //        }
 
 
 
 
-                connection.Open();
-                using var transaction = connection.BeginTransaction();
-                try
-                {
-                    command.Transaction = transaction;
 
-                    var result = command.ExecuteNonQuery();
 
-                    transaction.Commit();
-                    connection.Close();
+        //        connection.Open();
+        //        using var transaction = connection.BeginTransaction();
+        //        try
+        //        {
+        //            command.Transaction = transaction;
 
-                    return result.ToString();
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    return $"Error Transaction: {ex.Message}";
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"Error: {ex.Message}";
-            }
-        }
+        //            var result = command.ExecuteNonQuery();
+
+        //            transaction.Commit();
+        //            connection.Close();
+
+        //            return result.ToString();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            transaction.Rollback();
+        //            return $"Error Transaction: {ex.Message}";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return $"Error: {ex.Message}";
+        //    }
+        //}
 
 
         public List<object> TableSelector(dynamic reader, String tabelName, dynamic listData)

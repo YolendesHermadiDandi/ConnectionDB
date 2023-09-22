@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConnectionDB.Controller;
 
 namespace ConnectionDB.Model
 {
@@ -34,16 +35,16 @@ namespace ConnectionDB.Model
 
 
 
-        public void Insert(int regionId, string name)
-        {
+        //public void Insert(int regionId, string name)
+        //{
 
-            var country = new Country();
-            country.RegionId = regionId;
-            country.Name = name;
+        //    var country = new Country();
+        //    country.RegionId = regionId;
+        //    country.Name = name;
 
-            var query = new TabelQuery();
-            Console.WriteLine(query.Insert("tbl_countries", country));
-        }
+        //    var query = new TabelQuery();
+        //    Console.WriteLine(query.Insert("tbl_countries", country));
+        //}
 
     }
 }

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-
-
+using ConnectionDB.Controller;
 
 namespace ConnectionDB.Model
 {
@@ -108,7 +107,7 @@ namespace ConnectionDB.Model
             employee.Comissionpct = commissionPct;
             employee.Email = email;
             var query = new TabelQuery();
-            query.Insert("tbl_employees", employee);
+            //query.Insert("tbl_employees", employee);
 
 
         }

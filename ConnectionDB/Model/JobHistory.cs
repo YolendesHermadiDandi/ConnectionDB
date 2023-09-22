@@ -1,4 +1,6 @@
 ﻿
+using ConnectionDB.Controller;
+
 namespace ConnectionDB.Model
 {
     internal class JobHistory

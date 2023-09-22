@@ -1,9 +1,15 @@
 ﻿
 
+using System.Xml.Linq;
+
 namespace ConnectionDB.Model
 {
     internal class Region
     {
+
+        private QueryModel query;
+
+        private readonly string tabelName = "tbl_regions";
         public int Id { get; set; }
         public string Name { get; set; }
 
@@ -12,29 +18,63 @@ namespace ConnectionDB.Model
             return $"{Id} - {Name}";
         }
 
-        //public List<dynamic> GetAll()
-        //{
-        //    string tabelName = "tbl_regions";
-        //    if (ErrorHandler.EHandlerGetAll(tabelName) == true)
-        //    {
-        //        var region = new TabelQuery();
+        public List<Region> GetAll()
+        {
+            query = new QueryModel();
+            List<dynamic> regions = query.getAll(tabelName);
 
-        //        List<dynamic> getAllRegion = region.getAll(tabelName);
-        //        return getAllRegion;
-        //    };
+            List<Region> getAll = regions.Select(item => new Region
+            {
+                Id = item.Id,
+                Name = item.Name,
 
-        //    return new List<dynamic>();
-        //}
+            }).ToList();
 
-        
+            return getAll;
+        }
+
+        public List<Region> GetById(int id)
+        {
+            query = new QueryModel();
+            List<dynamic> region = query.getById(tabelName, id);
+
+            List<Region> getById = region.Select(item => new Region
+            {
+                Id = item.Id,
+                Name = item.Name,
+
+            }).ToList();
+
+            return getById;
+
+        }
 
 
-        //public static string GetById(string id)
-        //{
+        public string Insert(string name)
+        {
+          
+            Region region = new Region();
+            region.Name = name;
+            query = new QueryModel();
+            string result = query.Insert(tabelName, region);
+            return result;
+        }
 
-        //    return ErrorHandler.EHandlerGetRegionById(id);
-        //}
+        public string Delete(int id)
+        {
+            
+            
+            Region region = new Region();
+            region.Id = id;
+            query = new QueryModel();
+            string result = query.Delete(tabelName, region);
 
-        //public static string Insert(String name) { }
+            return result;
+        }
+
+        public string Update()
+        {
+            return "";
+        }
     }
 }
