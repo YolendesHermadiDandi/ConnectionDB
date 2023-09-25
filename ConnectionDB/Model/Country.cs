@@ -67,20 +67,30 @@ namespace ConnectionDB.Model
             return result;
         }
 
+        public string Update(Country data)
+        {
+
+            Country country = new Country();
+            country.Id = data.Id;
+            country.Name = data.Name;
+            country.RegionId = data.RegionId;
+
+            query = new QueryModel();
+            string result = query.Update(tabelName, country);
+            return result;
+        }
+
+        public string Delete(int id)
+        {
 
 
+            Country country = new Country();
+            country.Id = id;
+            query = new QueryModel();
+            string result = query.Delete(tabelName, country);
 
-
-        //public void Insert(int regionId, string name)
-        //{
-
-        //    var country = new Country();
-        //    country.RegionId = regionId;
-        //    country.Name = name;
-
-        //    var query = new TabelQuery();
-        //    Console.WriteLine(query.Insert("tbl_countries", country));
-        //}
+            return result;
+        }
 
     }
 }

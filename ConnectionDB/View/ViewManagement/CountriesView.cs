@@ -50,16 +50,16 @@ namespace ConnectionDB.View.ViewManagement
                     countryController.GetById(input);
                     break;
                 case "4":
-                    //regionController.Update();
+                    countryController.Update();
                     break;
                 case "5":
-                    //regionController.Delete();
+                    countryController.Delete();
                     break;
                 case "6":
                     return false;
 
                 default:
-                    //Console.WriteLine("inputan tidak valid");
+                    Console.WriteLine("inputan tidak valid");
                     break;
             }
             return true;
@@ -99,7 +99,7 @@ namespace ConnectionDB.View.ViewManagement
 
         public string InsertUpdate()
         {
-            Console.Write("Masukan id region: ");
+            Console.Write("Masukan id coutry: ");
             var name = Console.ReadLine();
             return name;
         }

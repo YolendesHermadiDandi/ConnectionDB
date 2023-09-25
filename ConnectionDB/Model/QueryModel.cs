@@ -260,9 +260,8 @@ namespace ConnectionDB.Model
                 return "TABEL TIDAK DITEMUKAN";
             }
 
+           
             command.CommandText = UpdateQuerySelector(tabelName, Data.Id);
-
-
 
 
             try
@@ -480,11 +479,12 @@ namespace ConnectionDB.Model
             else if (tabelName.Equals(tblRegions))
             {
 
-                return $"UPDATE tbl_regions SET name = @name where id={id}";
+                return $"UPDATE {tblRegions} SET name = @name where id={id}";
             }
             else if (tabelName.Equals(tblCountries))
             {
-                return "INSERT INTO tbl_countries VALUES (@regionId, @name)";
+                
+                return $"UPDATE {tblCountries} SET region_id = @regionId, name = @name WHERE id={id}";
             }
             else if (tabelName.Equals(tblLocatons))
             {
