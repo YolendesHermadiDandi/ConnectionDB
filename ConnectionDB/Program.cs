@@ -16,7 +16,7 @@ namespace ConnectionDB
             {
                 Console.WriteLine("1. regions");
                 Console.WriteLine("2. countries");
-                Console.WriteLine("3. List all locations");
+                Console.WriteLine("3. locations");
                 Console.WriteLine("4. List all departements");
                 Console.WriteLine("5. List all employees");
                 Console.WriteLine("6. List all job history");
@@ -39,9 +39,7 @@ namespace ConnectionDB
                     break;
                 case "2":
                     CountriesView.CountryMenu();
-                    //var country = new Country();
-                    //var countries = country.GetAll();
-                    //GeneralMenu.List("countries", countries);
+                  
                     break;
                 case "3":
                     //var location = new Location();
